@@ -1,0 +1,25 @@
+{
+  "name": "it-node-api-creator",
+  "version": "1.0.0",
+  "author": "Eric Valera <eric@iteraciona.com>",
+  "description": "A tool that allows you to quickly start a backend project with Node.js and Express",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "create-it-api": "./bin/start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:Iteraciona/node-api-template.git"
+  },
+  "keywords": [
+    "node",
+    "backend",
+    "API"
+  ],
+  "license": "MIT",
+  "type": "module"
+}
