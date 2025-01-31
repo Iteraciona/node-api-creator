@@ -1,6 +1,6 @@
 export const index = async (req, res, next) => {
     res.status(200).json({
-        message: "Welcome to A Food Store API",
+        message: "Hello there! Welcome to a your new API",
         success: true
     })
 }
