@@ -1,5 +1,6 @@
 'use strict';
 
+import './initLogger.js'
 import readline from "readline";
 
 if (!process.env.ENVIRONMENT || !["DEVELOPMENT", "PRODUCTION"].includes(process.env.ENVIRONMENT)) {
@@ -66,7 +67,7 @@ function startServer() {
     (async () => {
         try {
             const http = await import("http");
-            const { default: app } = await import("./app.js"); // Importa app correctamente
+            const { default: app } = await import("./app.js");
 
             const server = http.createServer(app);
             server.maxHeadersCount = 10000;

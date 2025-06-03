@@ -7,6 +7,8 @@ import * as path from "path";
 import {customMiddleware} from "./src/middlewares/custom.js";
 import {fileURLToPath} from "url";
 import {userInfo} from "./src/middlewares/userInfo.js";
+import {setupMongooseLogger} from "./src/helpers/mongoose-logger.js";
+import {errorLogger, requestLogger} from "./src/helpers/logger.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -64,6 +66,10 @@ app.use(express.urlencoded({ extended: true }));
 // Custom middleware
 app.use(customMiddleware);
 
+setupMongooseLogger()
+app.use(requestLogger)
+
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 import homeRoutes from './src/modules/home/routes/homeRoutes.js';
@@ -73,5 +79,7 @@ app.use('/', homeRoutes);
 app.use((req, res) => {
     res.redirect('/404');
 })
+
+app.use(errorLogger);
 
 export default app;
