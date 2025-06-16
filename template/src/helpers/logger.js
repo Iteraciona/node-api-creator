@@ -25,7 +25,7 @@ export const logger = createLogger({
         label({ label: logLabel }),
         timestamp(),
         printf(({ level, message, label, timestamp, ...meta }) => {
-            const currentTime = moment(timestamp).tz('America/New_York').format();
+            const currentTime = moment(timestamp).tz('America/Lima').format();
 
             let metaString = "";
             if (level === 'info') {
