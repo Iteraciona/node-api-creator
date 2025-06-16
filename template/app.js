@@ -7,8 +7,12 @@ import * as path from "path";
 import {customMiddleware} from "./src/middlewares/custom.js";
 import {fileURLToPath} from "url";
 import {userInfo} from "./src/middlewares/userInfo.js";
-import {setupMongooseLogger} from "./src/helpers/mongoose-logger.js";
-import {errorLogger, requestLogger} from "./src/helpers/logger.js";
+import {setupMongooseLogger} from './src/helpers/mongoose-logger.js';
+import {errorLogger, requestLogger} from './src/helpers/logger.js';
+import rateLimit from 'express-rate-limit';
+import homeRoutes from './src/modules/home/routes/homeRoutes.js';
+import v1 from './src/routes/v1/index.js';
+import {errorHandler, notFoundHandler} from './src/modules/home/controllers/notFoundController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,23 +67,41 @@ app.use(userInfo)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.set('trust proxy', 1);
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // 100 connections
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+app.use(limiter);
+
 // Custom middleware
 app.use(customMiddleware);
 
-setupMongooseLogger()
-app.use(requestLogger)
+setupMongooseLogger();
+app.use(requestLogger);
 
-app.get('/favicon.ico', (req, res) => res.status(204).end());
+const botLimiter = rateLimit({
+    windowMs: 5 * 60 * 1000,
+    max: 3,
+    message: 'Too much requests',
+});
+
+app.get(['/favicon.ico', '/favicon.png'], botLimiter, (req, res) => {
+    res.status(204).end();
+});
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-import homeRoutes from './src/modules/home/routes/homeRoutes.js';
 app.use('/', homeRoutes);
 
-// error page
-app.use((req, res) => {
-    res.redirect('/404');
-})
+app.use('/v1', v1);
 
 app.use(errorLogger);
+
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 export default app;
