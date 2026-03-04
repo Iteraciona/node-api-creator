@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-03-04
+
+### Changed
+- Modernized core dependencies: `express@^4.21.2`, `mongoose@^8.10.1`, `winston@^3.17.0`.
+- Replaced `moment`, `moment-timezone`, and `dateformat` with `luxon`.
+- Replaced `node-fetch` with native Node.js `fetch`.
+- Moved `nodemon` to `devDependencies`.
+- Updated Logger to use `luxon` for timestamps with `America/Lima` timezone.
+
+---
+
 ## [1.0.2] - 2025-06-02
 
 ### Added

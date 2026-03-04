@@ -101,12 +101,12 @@ The `package.json` includes the following:
 - `winston` - Logging utility.
 
 ### Development Tools:
-- `nodemon` - Auto-restart server on file changes.
+- `nodemon` - Auto-restart server on file changes (located in `devDependencies`).
 - `morgan` - HTTP request logging.
 - `multer` - File upload handling.
 
 ### Utilities:
-- `lodash`, `moment`, `moment-timezone` - Data manipulation.
+- `lodash`, `luxon` - Data manipulation and date handling.
 - `socket.io` - Real-time communication support.
 
 ## License
