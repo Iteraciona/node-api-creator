@@ -9,12 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.2.0] - 2026-03-04
 
+### Added
+- Professional startup banner with real-time system stats (Process RAM, System RAM, Disk Free, Node version, OS, and Uptime).
+- Flexible MongoDB connection flow: non-blocking warning in `DEVELOPMENT` mode and strict enforcement in `PRODUCTION`.
+- Early loading of environment variables using `import 'dotenv/config'`.
+
 ### Changed
-- Modernized core dependencies: `express@^4.21.2`, `mongoose@^8.10.1`, `winston@^3.17.0`.
-- Replaced `moment`, `moment-timezone`, and `dateformat` with `luxon`.
-- Replaced `node-fetch` with native Node.js `fetch`.
-- Moved `nodemon` to `devDependencies`.
-- Updated Logger to use `luxon` for timestamps with `America/Lima` timezone.
+- Migrated environment variables management from `nodemon.json` to `.env` (using `.env.example` as template).
+- Standardized `package.json` scripts: `"dev"` for nodemon and `"start"` for standard node execution.
+- Improved terminal output with ANSI colors and structured tables for better readability.
+
+### Removed
+- `nodemon.json.sample` in favor of a cleaner `.env` based configuration.
+
+---
+
+## [1.1.0] - 2026-03-04
+
+### Changed
+- Migrated from `moment`, `moment-timezone`, and `dateformat` to `luxon` for date and time management.
+- Updated all dependencies to their latest major/minor versions.
+- Moved `nodemon` from `dependencies` to `devDependencies`.
+- Updated Winston logger to use `luxon` for localized timestamps (`America/Lima`).
+
+### Security
+- Fixed vulnerabilities by updating dependencies and running `npm audit fix`.
 
 ---
 

@@ -25,14 +25,14 @@ if (fs.existsSync(targetPath)) {
 fs.mkdirSync(targetPath);
 fs.cpSync(templatePath, targetPath, { recursive: true });
 
-const nodemonSamplePath = path.join(targetPath, 'nodemon.json.sample');
-const nodemonPath = path.join(targetPath, 'nodemon.json');
+const envSamplePath = path.join(targetPath, '.env.example');
+const envPath = path.join(targetPath, '.env');
 
-if (fs.existsSync(nodemonSamplePath)) {
-    fs.renameSync(nodemonSamplePath, nodemonPath);
-    console.log(`🔄 Renamed: nodemon.json.sample → nodemon.json`);
+if (fs.existsSync(envSamplePath)) {
+    fs.copyFileSync(envSamplePath, envPath);
+    console.log(`✅ Created: .env from .env.example`);
 } else {
-    console.warn(`⚠️ Warning: nodemon.json.sample not found, can't rename it.`);
+    console.warn(`⚠️ Warning: .env.example not found in template.`);
 }
 
 console.log(`✅ Project "${projectName}" successfully created in ${targetPath}`);
