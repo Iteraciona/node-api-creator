@@ -1,115 +1,100 @@
 # A Template to Start a New Node API Project
 
-This template provides a starting point for creating a new Node.js API project. It comes preconfigured with commonly used dependencies and uses `nodemon` for development. You can later integrate it with `PM2` if needed.
+This template provides a professional and modern starting point for creating a new Node.js API project. It comes preconfigured with essential tools, a structured module system, and a robust logging and validation layer.
 
-Feel free to use, share, and contribute. Your contributions—whether bug reports, feature suggestions, or code—are always welcome!
+## Key Features
 
-Let’s make this template better together! 🚀
+- 🚀 **Professional Startup Banner**: Real-time system stats (RAM, Disk, Uptime) on boot.
+- 🛠️ **Environment Management**: Fully integrated with `.env` files.
+- 📊 **Modern Logging**: Winston logger with Luxon for precise localized timestamps.
+- 🔗 **Database Ready**: Mongoose integration with flexible connection logic (non-blocking in Dev).
+- 🛡️ **Security**: Pre-configured with CORS, Rate Limiting, and JWT authentication.
+- 🧩 **Modular Structure**: Organized by modules (Controllers, Models, Routes, Services).
 
 ## Prerequisites
 
-Ensure you have the following installed on your machine:
-- [Node.js](https://nodejs.org/) (Tested with version 18.2.0, latest LTS recommended)
-- [MongoDB](https://www.mongodb.com/) (If using a local database)
-- [Nodemon](https://www.npmjs.com/package/nodemon) (Installed globally or via `npm install`)
-- [create-node-component](https://www.npmjs.com/package/create-node-component) (Optional, for scaffolding components)
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (Latest LTS recommended)
+- [MongoDB](https://www.mongodb.com/)
 
 ## Installation
 
-1. Clone this repository:
+1. Create a new project using the CLI:
    ```sh
-   git clone <repository-url>
-   cd <project-folder>
+   npx create-it-api my-awesome-project
    ```
 
-2. Install dependencies:
+2. Enter the directory:
    ```sh
-   npm install
+   cd my-awesome-project
+   ```
+
+3. Configure your environment:
+   ```sh
+   # .env is automatically created from .env.example
+   nano .env
    ```
 
 ## Running the Project
 
 ### Development Mode
+Auto-restarts on file changes using `nodemon`:
+```sh
+npm run dev
+```
 
-To run the project with `nodemon` (auto-restarts on file changes):
+### Production Mode
+Standard execution with `node`:
 ```sh
 npm start
 ```
 
-### Production Mode (Optional: Using PM2)
+## Package.json Overview
 
-If you want to use `PM2` for process management:
-```sh
-npm install -g pm2
-npm run build # If needed
-pm2 start server.js --name "my-api"
-```
+The `package.json` includes the following modern stack:
 
-## Configuration
+### Key Dependencies:
+- `express` (v5+) - Fast, unopinionated, minimalist web framework.
+- `mongoose` (v9+) - Elegant MongoDB object modeling.
+- `express-validator` - Set of express.js middlewares that wraps validator.js.
+- `jsonwebtoken` - JWT-based authentication.
+- `bcrypt` - Optimized password hashing.
+- `cors` - Cross-origin resource sharing.
+- `dotenv` - Zero-dependency environment variable loader.
+- `winston` - Universal logging library with daily rotation support.
 
-### Environment Variables
+### Development Tools:
+- `nodemon` - Auto-restart server on file changes.
+- `morgan` - HTTP request logger middleware.
+- `multer` - Middleware for handling `multipart/form-data` (file uploads).
 
-The project reads environment variables from `nodemon.json`. Below are the key variables you might need to configure:
-
-```sh
-cp nodemon.json.sample nodemon.json
-```
-
-```sh
-ENVIRONMENT=DEVELOPMENT
-DEFAULT_PORT=3001
-MONGO_USER=yourMongoUser
-MONGO_PASSWORD=yourMongoPassword
-MONGO_SERVER=yourMongoServer
-MONGO_DB=yourDatabaseName
-JWT_KEY=yourJWTKey
-```
-
-Ensure all required variables are set before starting the project.
+### Utilities:
+- `luxon` - Powerful and modern library for working with dates and times.
+- `lodash` - Modern JavaScript utility library.
+- `socket.io` - Real-time, bidirectional and event-based communication.
+- `resend` - Email sending integration.
+- `uuid` - RFC4122 UUID generation.
 
 ## Folder Structure
 
 ```
-nodemon.json
+.env
 package.json
 app.js
 db.js
 server.js
 src/
-- helpers/
-- middlewares/
-- modules/
---- home/
----- controllers/
----- models/
----- routes/
----- services/
-- views/
+├── helpers/      # Global utilities (logger, token, etc.)
+├── middlewares/  # Express middlewares
+├── modules/      # Business logic by module
+│   └── home/
+│       ├── controllers/
+│       ├── models/
+│       ├── routes/
+│       └── services/
+└── routes/       # Versioned route entry points
 ```
-
-## Package.json Overview
-
-The `package.json` includes the following:
-
-### Key Dependencies:
-- `express` - Web framework for building APIs.
-- `mongoose` - MongoDB ODM for data modeling.
-- `jsonwebtoken` - JWT-based authentication.
-- `bcrypt` - Password hashing.
-- `cors` - Cross-origin request handling.
-- `dotenv` - Environment variable management.
-- `winston` - Logging utility.
-
-### Development Tools:
-- `nodemon` - Auto-restart server on file changes.
-- `morgan` - HTTP request logging.
-- `multer` - File upload handling.
-
-### Utilities:
-- `lodash`, `moment`, `moment-timezone` - Data manipulation.
-- `socket.io` - Real-time communication support.
 
 ## License
 
 This project is licensed under the MIT License.
-

@@ -1,5 +1,5 @@
 import { createLogger, format, transports } from 'winston';
-import moment from 'moment-timezone';
+import { DateTime } from 'luxon';
 import lodash from "lodash";
 import DailyRotateFile from 'winston-daily-rotate-file';
 import onHeaders from 'on-headers';
@@ -25,7 +25,7 @@ export const logger = createLogger({
         label({ label: logLabel }),
         timestamp(),
         printf(({ level, message, label, timestamp, ...meta }) => {
-            const currentTime = moment(timestamp).tz('America/Lima').format();
+            const currentTime = DateTime.fromISO(timestamp).setZone('America/Lima').toString();
 
             let metaString = "";
             if (level === 'info') {
